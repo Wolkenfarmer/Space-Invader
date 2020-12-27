@@ -27,6 +27,5 @@ public class OutOfScreenKillBehaviorScript : MonoBehaviour
 	void Destroy()
 	{
 		Destroy(gameObject);
-		Debug.Log($"Object {gameObject} destroyed.");
 	}
 }
