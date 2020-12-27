@@ -20,6 +20,8 @@ public class PlayerBehaviorScript : SpaceShipBehaviorScript
 
 		Speed = StartSpeed;
 		Reload = StartReload;
+
+		Team = SpaceShipBehaviorScript.PlayerTeam;
 	}
 
 	protected override void Update()
