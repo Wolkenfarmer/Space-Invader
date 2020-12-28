@@ -7,11 +7,20 @@ public class DefaultEnemyBehaviorScript : SpaceShipBehaviorScript
 	void Start()
 	{
 		Team = EnemyTeam;
+		setHealth(200);
+		setDamage(50);
 	}
 
 	protected override void Update()
 	{
 		base.Update();
+
+		// Check if dead
+		if (Health <= 0)
+        {
+			GameBehaviorScript.enemies.Remove(this.gameObject);
+			Kill();
+        }
 
 		// Dummy movement
 		if (transform.position.x > 8f)

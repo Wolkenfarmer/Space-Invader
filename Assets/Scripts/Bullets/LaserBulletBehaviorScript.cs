@@ -1,4 +1,7 @@
 public class LaserBulletBehaviorScript : BulletBehaviorScript
 {
-	// temp
+	void Start()
+	{
+		setHealth(100);
+	}
 }
