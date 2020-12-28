@@ -2,19 +2,20 @@ using UnityEngine;
 
 public class SpaceShipBehaviorScript : MonoBehaviour
 {
-	protected GameObject BulletPrefab;
-
 	public const int PlayerTeam = 1;
 	public const int EnemyTeam = 2;
 
+	public GameObject BulletPrefab;
+
+	[System.NonSerialized]
 	public int Team;
 
-	protected int Health;
-	protected int Shield;
+	public int Health;
+	public int Shield;
 
-	protected float Speed;
+	public float Speed;
 
-	protected int Reload;
+	public int Reload;
 	int currentReload;
 
 	protected virtual void Update()
@@ -55,7 +56,7 @@ public class SpaceShipBehaviorScript : MonoBehaviour
 		var bullet = collision.gameObject.GetComponent<BulletBehaviorScript>();
 		if (bullet != null && bullet.Team != Team)
 		{
-			InflictDamage(bullet.GetDamage());
+			InflictDamage(bullet.Damage);
 
 			Destroy(bullet.gameObject);
 		}

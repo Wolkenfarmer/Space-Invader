@@ -2,26 +2,9 @@ using UnityEngine;
 
 public class PlayerBehaviorScript : SpaceShipBehaviorScript
 {
-	public GameObject StartBulletPrefab;
-
-	public int StartHealth = 200;
-	public int StartShield = 100;
-
-	public float StartSpeed = 0.1f;
-
-	public int StartReload = 120;
-
 	void Start()
 	{
-		BulletPrefab = StartBulletPrefab;
-
-		Health = StartHealth;
-		Shield = StartShield;
-
-		Speed = StartSpeed;
-		Reload = StartReload;
-
-		Team = SpaceShipBehaviorScript.PlayerTeam;
+		Team = PlayerTeam;
 	}
 
 	protected override void Update()

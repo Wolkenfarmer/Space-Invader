@@ -3,13 +3,13 @@ using UnityEngine;
 public class BulletBehaviorScript : MonoBehaviour
 {
 	// if fired by player, move into the other direction!
+	[System.NonSerialized]
 	public bool FiredByPlayer;
-
+	[System.NonSerialized]
 	public int Team;
 
-	protected float Speed;
-
-	protected int Damage;
+	public float Speed;
+	public int Damage;
 
 	void Update()
 	{
@@ -30,15 +30,10 @@ public class BulletBehaviorScript : MonoBehaviour
 		var bullet = collision.gameObject.GetComponent<BulletBehaviorScript>();
 		if (bullet != null)
 		{
-			CancelDamage(bullet.GetDamage());
+			CancelDamage(bullet.Damage);
 			bullet.CancelDamage(Damage);
 			Debug.Log("bullets collided.");
 		}
-	}
-
-	public int GetDamage()
-	{
-		return Damage;
 	}
 
 	public void CancelDamage(int damage)

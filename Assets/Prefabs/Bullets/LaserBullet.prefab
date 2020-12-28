@@ -137,6 +137,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FiredByPlayer: 0
   Team: 0
+  Speed: 0.1
+  Damage: 100
   StartSpeed: 0.1
   StartDamage: 100
 --- !u!114 &3298035069655115728
