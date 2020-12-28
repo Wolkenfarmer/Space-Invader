@@ -156,12 +156,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d513c9b878c71d42a130ca284d90130, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 0
-  StartBulletPrefab: {fileID: 3298035069655115739, guid: aaef4647336f099488f50eb29f8193f3, type: 3}
-  StartHealth: 2000
-  StartShield: 100
-  StartSpeed: 0.1
-  StartReload: 120
+  BulletPrefab: {fileID: 3298035069655115739, guid: aaef4647336f099488f50eb29f8193f3, type: 3}
+  Health: 2000
+  Shield: 0
+  Speed: 0.07
+  Reload: 120
 --- !u!114 &3176466
 MonoBehaviour:
   m_ObjectHideFlags: 0
