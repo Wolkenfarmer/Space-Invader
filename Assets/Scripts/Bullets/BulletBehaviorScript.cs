@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BulletBehaviorScript : MonoBehaviour
+public class BulletBehaviorScript : MonoBehaviour, Assets.Scripts.IDamageableObject
 {
 	// if fired by player, move into the other direction!
 	[System.NonSerialized]
@@ -9,10 +9,33 @@ public class BulletBehaviorScript : MonoBehaviour
 	public int Team;
 
 	public float Speed;
-	public int Damage;
+
+	int pHealth;
+	int pShield;
+	int pDamage;
+
+	public int Health
+	{
+		get { return pHealth; }
+	}
+	public int Shield
+	{
+		get { return pShield; }
+	}
+	public int Damage
+	{
+		get { return pDamage; }
+	}
 
 	void Update()
 	{
+		// Check if dead and update of damage (bullet health = its damage)
+		if (pHealth <= 0)
+			Destroy(gameObject);
+		else
+			setDamage(pHealth);
+
+		// Movement
 		var position = transform.position;
 		var speed = -Speed;
 
@@ -27,21 +50,32 @@ public class BulletBehaviorScript : MonoBehaviour
 	public void OnCollisionEnter2D(Collision2D collision)
 	{
 		// The other collision object is a bullet
-		var bullet = collision.gameObject.GetComponent<BulletBehaviorScript>();
-		if (bullet != null)
-		{
-			CancelDamage(bullet.Damage);
-			bullet.CancelDamage(Damage);
-			Debug.Log("bullets collided.");
-		}
+		var bBullet = collision.gameObject.TryGetComponent<BulletBehaviorScript>(out var bullet);
+		if (bBullet && bullet.Team != Team)
+			InflictDamage(bullet);
+
+		// The other collision object is a space ship
+		var bSpaceShip = collision.gameObject.TryGetComponent<SpaceShipBehaviorScript>(out var spaceShip);
+		if (bSpaceShip && spaceShip.Team != Team)
+			InflictDamage(spaceShip);
 	}
 
-	public void CancelDamage(int damage)
+	public void InflictDamage(Assets.Scripts.IDamageableObject otherObject)
 	{
-		Damage -= damage;
+		Debug.Log($"Collision! Bullet -> {otherObject} | Damage inflicted: {Damage}");
 
-		// Bullet canceled out
-		if (Damage <= 0)
-			Destroy(gameObject);
+		otherObject.setShield(otherObject.Shield - Damage);
+
+		// Shield has taken all the damage
+		if (otherObject.Shield >= 0)
+			return;
+
+		// Substract left damage from health and set shield to 0.
+		otherObject.setHealth(otherObject.Health + otherObject.Shield);
+		otherObject.setShield(0);
 	}
+
+	public void setShield(int newShield) { pShield = newShield; }
+	public void setHealth(int newHealth) { pHealth = newHealth; }
+	public void setDamage(int newDamage) { pDamage = newDamage; }
 }

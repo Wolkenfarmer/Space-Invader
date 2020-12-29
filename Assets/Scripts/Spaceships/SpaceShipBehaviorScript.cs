@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpaceShipBehaviorScript : MonoBehaviour
+public class SpaceShipBehaviorScript : MonoBehaviour, Assets.Scripts.IDamageableObject
 {
 	public const int PlayerTeam = 1;
 	public const int EnemyTeam = 2;
@@ -10,8 +10,22 @@ public class SpaceShipBehaviorScript : MonoBehaviour
 	[System.NonSerialized]
 	public int Team;
 
-	public int Health;
-	public int Shield;
+	int pHealth;
+	int pShield;
+	int pDamage;
+
+	public int Health
+	{
+		get { return pHealth; }
+	}
+	public int Shield
+	{
+		get { return pShield; }
+	}
+	public int Damage
+	{
+		get { return pDamage; }
+	}
 
 	public float Speed;
 
@@ -53,31 +67,29 @@ public class SpaceShipBehaviorScript : MonoBehaviour
 	public void OnCollisionEnter2D(Collision2D collision)
 	{
 		// The other collision object is a bullet
-		var bullet = collision.gameObject.GetComponent<BulletBehaviorScript>();
-		if (bullet != null && bullet.Team != Team)
-		{
-			InflictDamage(bullet.Damage);
+		var bBullet = collision.gameObject.TryGetComponent<BulletBehaviorScript>(out var bullet);
+		if (bBullet && bullet.Team != Team)
+			InflictDamage(bullet);
 
-			Destroy(bullet.gameObject);
-		}
+		// The other collision object is a space ship
+		var bSpaceShip = collision.gameObject.TryGetComponent<SpaceShipBehaviorScript>(out var spaceShip);
+		if (bSpaceShip && spaceShip.Team != Team)
+			InflictDamage(spaceShip);
 	}
 
-	void InflictDamage(int damage)
+	public void InflictDamage(Assets.Scripts.IDamageableObject otherObject)
 	{
-		Debug.Log($"Collision! Damage inflicted: {damage}");
+		Debug.Log($"Collision! SpaceShip -> {otherObject} | Damage inflicted: {Damage}");
 
-		Shield -= damage;
+		otherObject.setShield(otherObject.Shield - Damage);
 
 		// Shield has taken all the damage
-		if (Shield >= 0)
+		if (otherObject.Shield >= 0)
 			return;
 
 		// Substract left damage from health and set shield to 0.
-		Health += Shield;
-		Shield = 0;
-
-		if (Health <= 0)
-			Kill();
+		otherObject.setHealth(otherObject.Health + otherObject.Shield);
+		otherObject.setShield(0);
 	}
 
 	// Method that can be overriden by PlayerBehavior to end game
@@ -86,4 +98,8 @@ public class SpaceShipBehaviorScript : MonoBehaviour
 		Debug.Log("Spaceship killed.");
 		Destroy(gameObject);
 	}
+
+	public void setShield(int newShield) { pShield = newShield; }
+	public void setHealth(int newHealth) { pHealth = newHealth; }
+	public void setDamage(int newDamage) { pDamage = newDamage; }
 }
