@@ -17,10 +17,7 @@ public class DefaultEnemyBehaviorScript : SpaceShipBehaviorScript
 
 		// Check if dead
 		if (Health <= 0)
-        {
-			GameBehaviorScript.enemies.Remove(this.gameObject);
 			Kill();
-        }
 
 		// Dummy movement
 		if (transform.position.x > 8f)

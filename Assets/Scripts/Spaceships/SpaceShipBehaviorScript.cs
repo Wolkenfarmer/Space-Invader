@@ -15,17 +15,17 @@ public class SpaceShipBehaviorScript : MonoBehaviour, Assets.Scripts.IDamageable
 	int pDamage;
 
 	public int Health
-    {
+	{
 		get { return pHealth; }
-    }
+	}
 	public int Shield
-    {
+	{
 		get { return pShield; }
-    }
+	}
 	public int Damage
-    {
+	{
 		get { return pDamage; }
-    }
+	}
 
 	public float Speed;
 
@@ -69,16 +69,12 @@ public class SpaceShipBehaviorScript : MonoBehaviour, Assets.Scripts.IDamageable
 		// The other collision object is a bullet
 		var bBullet = collision.gameObject.TryGetComponent<BulletBehaviorScript>(out var bullet);
 		if (bBullet && bullet.Team != Team)
-		{
 			InflictDamage(bullet);
-		}
 
 		// The other collision object is a space ship
 		var bSpaceShip = collision.gameObject.TryGetComponent<SpaceShipBehaviorScript>(out var spaceShip);
 		if (bSpaceShip && spaceShip.Team != Team)
-		{
 			InflictDamage(spaceShip);
-		}
 	}
 
 	public void InflictDamage(Assets.Scripts.IDamageableObject otherObject)

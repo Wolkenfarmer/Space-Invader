@@ -5,7 +5,7 @@ public class GameBehaviorScript : MonoBehaviour
 {
 	public GameObject EnemyPrefab;
 
-	public static readonly List<GameObject> enemies = new List<GameObject>();
+	readonly List<GameObject> enemies = new List<GameObject>();
 	int currentWave;
 
 	void Start()

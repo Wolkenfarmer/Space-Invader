@@ -52,16 +52,12 @@ public class BulletBehaviorScript : MonoBehaviour, Assets.Scripts.IDamageableObj
 		// The other collision object is a bullet
 		var bBullet = collision.gameObject.TryGetComponent<BulletBehaviorScript>(out var bullet);
 		if (bBullet && bullet.Team != Team)
-        {
 			InflictDamage(bullet);
-		}
 
 		// The other collision object is a space ship
 		var bSpaceShip = collision.gameObject.TryGetComponent<SpaceShipBehaviorScript>(out var spaceShip);
 		if (bSpaceShip && spaceShip.Team != Team)
-		{
 			InflictDamage(spaceShip);
-		}
 	}
 
 	public void InflictDamage(Assets.Scripts.IDamageableObject otherObject)
