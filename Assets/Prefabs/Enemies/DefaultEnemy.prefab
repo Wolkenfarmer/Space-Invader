@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5154205794c313b46bcda37d9d411885, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsPlayer: 0
 --- !u!114 &4031004695079166686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,8 +149,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletPrefab: {fileID: 3298035069655115739, guid: aaef4647336f099488f50eb29f8193f3, type: 3}
-  Health: 100
-  Shield: 0
-  BodyDamage: 50
   Speed: 0.05
   Reload: 240
