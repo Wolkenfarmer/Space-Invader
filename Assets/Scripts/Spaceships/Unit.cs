@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -11,14 +10,13 @@ namespace Assets.Scripts
 		GameObject group;
 		float leftBound;
 		float rightBound;
-		float speed;
+		float speed = float.MaxValue;
 		private bool moveRight;
 
-		public Unit(WaveScript parent, List<GameObject> objects, float speed, bool firstRight)
+		public Unit(WaveScript parent, List<GameObject> objects, bool firstRight)
 		{
 			this.parent = parent;
 			this.objects = objects;
-			this.speed = speed;
 			moveRight = firstRight;
 
 			this.objects.Sort(CompareByPosition_xMin);
@@ -28,7 +26,11 @@ namespace Assets.Scripts
 			foreach (var obj in this.objects)
 			{
 				obj.transform.parent = group.transform;
-				obj.GetComponent<DefaultEnemyBehaviorScript>().SetPartOfUnit(this);
+				var enemyScript = obj.GetComponent<DefaultEnemyBehaviorScript>();
+				enemyScript.SetPartOfUnit(this);
+
+				if (enemyScript.Speed < speed)
+					speed = enemyScript.Speed;
 			}
 
 			leftBound = this.objects[0].transform.position.x;

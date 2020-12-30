@@ -36,7 +36,7 @@ public class WaveScript : MonoBehaviour
 				enemies.Add(obj);
 			}
 
-			unit = new Assets.Scripts.Unit(this, enemies, enemies[0].GetComponent<SpaceShipBehaviorScript>().Speed, true);
+			unit = new Assets.Scripts.Unit(this, enemies, true);
 			enemies = null;
 			units.Add(unit);
 		}
