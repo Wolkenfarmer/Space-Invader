@@ -28,14 +28,17 @@ public class WaveController : MonoBehaviour
 	public void Init(int level)
 	{
 		maximumWaves = level * 2 + 1;
-		NewWave();
+		nextWave();
 	}
 
-	// NewWave. The type of wave and exact content of it can be specified here. Grouping in units is recommended.
-	public void NewWave()
+	// The type of wave and exact content of it can be specified here. Grouping in units is recommended.
+	void nextWave()
 	{
 		if (currentWave >= maximumWaves)
+		{
+			GameController.Victory();
 			return;
+		}
 
 		currentWave++;
 
@@ -69,6 +72,6 @@ public class WaveController : MonoBehaviour
 		units.Remove(deadUnit);
 
 		if (units.Count < 1)
-			NewWave();
+			nextWave();
 	}
 }

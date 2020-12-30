@@ -29,8 +29,7 @@ public class Playership : Spaceship
 
 	protected override void Kill()
 	{
-		Debug.Log("Sad noises");
 		Destroy(gameObject);
-		GameObject.Find("GameController").GetComponent<GameController>().PlayerDead();
+		GameController.Defeat();
 	}
 }
