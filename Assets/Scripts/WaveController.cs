@@ -5,10 +5,18 @@ public class WaveController : MonoBehaviour
 {
 	public GameObject EnemyPrefab;
 
+	GameController gameController;
+
 	readonly List<Assets.Scripts.WaveUnit> units = new List<Assets.Scripts.WaveUnit>();
 	List<GameObject> enemies;
 
+	int maximumWaves;
 	int currentWave;
+
+	void Start()
+	{
+		gameController = GameObject.Find("GameController").GetComponent<GameController>();
+	}
 
 	void Update()
 	{
@@ -16,11 +24,24 @@ public class WaveController : MonoBehaviour
 			unit.Update();
 	}
 
+	// Method used to generate maximum wave count.
+	public void Init(int level)
+	{
+		maximumWaves = level * 2 + 1;
+		NewWave();
+	}
+
 	// NewWave. The type of wave and exact content of it can be specified here. Grouping in units is recommended.
 	public void NewWave()
 	{
-		Debug.Log($"New Wave!");
+		if (currentWave >= maximumWaves)
+			return;
+
 		currentWave++;
+
+		Debug.Log($"New Wave: {currentWave}/{maximumWaves}");
+		gameController.UIController.SetWave(currentWave, maximumWaves);
+
 		var half = (currentWave / 2) * -1;
 
 		for (int i = 0; i < (currentWave / 2) + 1; i++)
