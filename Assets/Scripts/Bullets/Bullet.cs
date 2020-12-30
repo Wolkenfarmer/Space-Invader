@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BulletBehaviorScript : MonoBehaviour, Assets.Scripts.IDamageableObject
+public class Bullet : MonoBehaviour, Assets.Scripts.IDamageableObject
 {
 	// if fired by player, move into the other direction!
 	[System.NonSerialized]
@@ -50,12 +50,12 @@ public class BulletBehaviorScript : MonoBehaviour, Assets.Scripts.IDamageableObj
 	public void OnCollisionEnter2D(Collision2D collision)
 	{
 		// The other collision object is a bullet
-		var bBullet = collision.gameObject.TryGetComponent<BulletBehaviorScript>(out var bullet);
+		var bBullet = collision.gameObject.TryGetComponent<Bullet>(out var bullet);
 		if (bBullet && bullet.Team != Team)
 			InflictDamage(bullet);
 
 		// The other collision object is a space ship
-		var bSpaceShip = collision.gameObject.TryGetComponent<SpaceShipBehaviorScript>(out var spaceShip);
+		var bSpaceShip = collision.gameObject.TryGetComponent<Spaceship>(out var spaceShip);
 		if (bSpaceShip && spaceShip.Team != Team)
 			InflictDamage(spaceShip);
 	}

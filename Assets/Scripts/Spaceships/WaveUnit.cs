@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-	public class Unit 
+	public class WaveUnit
 	{
-		WaveScript parent;
+		WaveController parent;
 		List<GameObject> objects = new List<GameObject>();
 		GameObject group;
 		float leftBound;
@@ -13,7 +13,7 @@ namespace Assets.Scripts
 		float speed = float.MaxValue;
 		private bool moveRight;
 
-		public Unit(WaveScript parent, List<GameObject> objects, bool firstRight)
+		public WaveUnit(WaveController parent, List<GameObject> objects, bool firstRight)
 		{
 			this.parent = parent;
 			this.objects = objects;
@@ -26,7 +26,7 @@ namespace Assets.Scripts
 			foreach (var obj in this.objects)
 			{
 				obj.transform.parent = group.transform;
-				var enemyScript = obj.GetComponent<DefaultEnemyBehaviorScript>();
+				var enemyScript = obj.GetComponent<Enemyship>();
 				enemyScript.SetPartOfUnit(this);
 
 				if (enemyScript.Speed < speed)

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ScreenClampBehaviorScript : MonoBehaviour
+public class ScreenClamper : MonoBehaviour
 {
 	public bool IsPlayer;
 

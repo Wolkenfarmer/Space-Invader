@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BlockadeBehaviorScript : MonoBehaviour
+public class Blockade : MonoBehaviour
 {
 	public GameObject Player;
 	SpriteRenderer blockadeRenderer;

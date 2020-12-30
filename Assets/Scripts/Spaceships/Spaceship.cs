@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpaceShipBehaviorScript : MonoBehaviour, Assets.Scripts.IDamageableObject
+public class Spaceship : MonoBehaviour, Assets.Scripts.IDamageableObject
 {
 	public const int PlayerTeam = 1;
 	public const int EnemyTeam = 2;
@@ -56,7 +56,7 @@ public class SpaceShipBehaviorScript : MonoBehaviour, Assets.Scripts.IDamageable
 		obj.transform.position = gameObject.transform.position;
 
 		// Set parameters in script
-		var bullet = obj.GetComponent<BulletBehaviorScript>();
+		var bullet = obj.GetComponent<Bullet>();
 		bullet.FiredByPlayer = isPlayer;
 		bullet.Team = Team;
 
@@ -67,12 +67,12 @@ public class SpaceShipBehaviorScript : MonoBehaviour, Assets.Scripts.IDamageable
 	public void OnCollisionEnter2D(Collision2D collision)
 	{
 		// The other collision object is a bullet
-		var bBullet = collision.gameObject.TryGetComponent<BulletBehaviorScript>(out var bullet);
+		var bBullet = collision.gameObject.TryGetComponent<Bullet>(out var bullet);
 		if (bBullet && bullet.Team != Team)
 			InflictDamage(bullet);
 
 		// The other collision object is a space ship
-		var bSpaceShip = collision.gameObject.TryGetComponent<SpaceShipBehaviorScript>(out var spaceShip);
+		var bSpaceShip = collision.gameObject.TryGetComponent<Spaceship>(out var spaceShip);
 		if (bSpaceShip && spaceShip.Team != Team)
 			InflictDamage(spaceShip);
 	}

@@ -1,8 +1,6 @@
-using UnityEngine;
-
-public class DefaultEnemyBehaviorScript : SpaceShipBehaviorScript
+public class Enemyship : Spaceship
 {
-	Assets.Scripts.Unit parent;
+	Assets.Scripts.WaveUnit parent;
 	bool moveRight;
 	bool partOfUnit;
 
@@ -24,7 +22,6 @@ public class DefaultEnemyBehaviorScript : SpaceShipBehaviorScript
 			Kill();
 		}
 
-		
 		if (!partOfUnit)
 			move();
 
@@ -47,7 +44,7 @@ public class DefaultEnemyBehaviorScript : SpaceShipBehaviorScript
 		Move(movement, -Speed * 0.5f);
 	}
 
-	public void SetPartOfUnit(Assets.Scripts.Unit parent)
+	public void SetPartOfUnit(Assets.Scripts.WaveUnit parent)
 	{
 		this.parent = parent;
 		partOfUnit = true;

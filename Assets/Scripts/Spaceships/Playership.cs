@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerBehaviorScript : SpaceShipBehaviorScript
+public class Playership : Spaceship
 {
 	void Start()
 	{
@@ -15,9 +15,7 @@ public class PlayerBehaviorScript : SpaceShipBehaviorScript
 
 		// Check if dead
 		if (Health <= 0)
-		{
 			Kill();
-		}
 
 		// Basic key input
 		var h = Input.GetAxis("Horizontal");
@@ -33,6 +31,6 @@ public class PlayerBehaviorScript : SpaceShipBehaviorScript
 	{
 		Debug.Log("Sad noises");
 		Destroy(gameObject);
-		GameObject.Find("GameController").GetComponent<GameBehaviorScript>().PlayerDead();
+		GameObject.Find("GameController").GetComponent<GameController>().PlayerDead();
 	}
 }
