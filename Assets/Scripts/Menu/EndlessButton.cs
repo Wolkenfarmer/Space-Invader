@@ -13,7 +13,7 @@ public class EndlessButton : MonoBehaviour
 
 	void onClicked()
 	{
-		// TODO: enable boolean in settings.cs file that comes with PR #13
+		GameState.IsEndless = true;
 		SceneManager.LoadScene("game");
 	}
 }
