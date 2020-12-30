@@ -38,6 +38,13 @@
         },
         {
             "userAdded": false,
+            "type": "UnityEngine.Cubemap",
+            "ignore": false,
+            "defaultInstantiationMode": 0,
+            "supportsModification": true
+        },
+        {
+            "userAdded": false,
             "type": "UnityEngine.GameObject",
             "ignore": false,
             "defaultInstantiationMode": 0,
@@ -52,6 +59,13 @@
         },
         {
             "userAdded": false,
+            "type": "UnityEngine.LightingSettings",
+            "ignore": false,
+            "defaultInstantiationMode": 0,
+            "supportsModification": true
+        },
+        {
+            "userAdded": false,
             "type": "UnityEngine.Material",
             "ignore": false,
             "defaultInstantiationMode": 0,
@@ -62,6 +76,13 @@
             "type": "UnityEditor.MonoScript",
             "ignore": true,
             "defaultInstantiationMode": 1,
+            "supportsModification": true
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.PhysicMaterial",
+            "ignore": false,
+            "defaultInstantiationMode": 0,
             "supportsModification": true
         },
         {
@@ -111,6 +132,13 @@
             "type": "UnityEngine.ShaderVariantCollection",
             "ignore": true,
             "defaultInstantiationMode": 1,
+            "supportsModification": true
+        },
+        {
+            "userAdded": false,
+            "type": "UnityEngine.Texture",
+            "ignore": false,
+            "defaultInstantiationMode": 0,
             "supportsModification": true
         },
         {
