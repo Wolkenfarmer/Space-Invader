@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DefaultEnemyBehaviorScript : SpaceShipBehaviorScript
 {
-	Assets.Scripts.DefaultEnemyUnitScript parent;
+	Assets.Scripts.Unit parent;
 	bool moveRight;
 	bool partOfUnit;
 
@@ -19,10 +19,10 @@ public class DefaultEnemyBehaviorScript : SpaceShipBehaviorScript
 
 		// Check if dead
 		if (Health <= 0)
-        {
+		{
 			parent.ObjectDown(gameObject);
 			Kill();
-        }
+		}
 
 		
 		if (!partOfUnit)
@@ -47,7 +47,7 @@ public class DefaultEnemyBehaviorScript : SpaceShipBehaviorScript
 		Move(movement, -Speed * 0.5f);
 	}
 
-	public void SetPartOfUnit(Assets.Scripts.DefaultEnemyUnitScript parent)
+	public void SetPartOfUnit(Assets.Scripts.Unit parent)
 	{
 		this.parent = parent;
 		partOfUnit = true;

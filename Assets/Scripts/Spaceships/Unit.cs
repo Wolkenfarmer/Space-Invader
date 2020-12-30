@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts
 {
-	public class DefaultEnemyUnitScript
+	public class Unit 
 	{
 		WaveScript parent;
 		List<GameObject> objects = new List<GameObject>();
@@ -14,12 +14,12 @@ namespace Assets.Scripts
 		float speed;
 		private bool moveRight;
 
-		public DefaultEnemyUnitScript(WaveScript parent, List<GameObject> objects, float speed, bool firstRight)
+		public Unit(WaveScript parent, List<GameObject> objects, float speed, bool firstRight)
 		{
 			this.parent = parent;
 			this.objects = objects;
 			this.speed = speed;
-			moveRight = false;
+			moveRight = firstRight;
 
 			this.objects.Sort(CompareByPosition_xMin);
 
@@ -81,7 +81,8 @@ namespace Assets.Scripts
 			}
 			else
 			{
-				parent.unitDown();
+				parent.UnitDown(this);
+				Debug.Log($"Unit down! {this}");
 			}
 		}
 	}
