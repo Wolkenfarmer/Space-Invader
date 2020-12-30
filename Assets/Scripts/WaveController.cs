@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveScript : MonoBehaviour
+public class WaveController : MonoBehaviour
 {
 	public GameObject EnemyPrefab;
 
-	readonly List<Assets.Scripts.Unit> units = new List<Assets.Scripts.Unit>();
+	readonly List<Assets.Scripts.WaveUnit> units = new List<Assets.Scripts.WaveUnit>();
 	List<GameObject> enemies;
 
 	int currentWave;
@@ -26,7 +26,7 @@ public class WaveScript : MonoBehaviour
 		for (int i = 0; i < (currentWave / 2) + 1; i++)
 		{
 			Debug.Log($"New Unit");
-			Assets.Scripts.Unit unit;
+			Assets.Scripts.WaveUnit unit;
 			enemies	= new List<GameObject>();
 
 			for (int k = 0; k < currentWave; k++)
@@ -36,14 +36,14 @@ public class WaveScript : MonoBehaviour
 				enemies.Add(obj);
 			}
 
-			unit = new Assets.Scripts.Unit(this, enemies, true);
+			unit = new Assets.Scripts.WaveUnit(this, enemies, true);
 			enemies = null;
 			units.Add(unit);
 		}
 	}
 
 	// Gets called if a unit of the current wave got killed. If all units are dead, NewWave wll be called
-	public void UnitDown(Assets.Scripts.Unit deadUnit)
+	public void UnitDown(Assets.Scripts.WaveUnit deadUnit)
 	{
 		units.Remove(deadUnit);
 

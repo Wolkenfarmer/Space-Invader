@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class GameBehaviorScript : MonoBehaviour
+public class GameController : MonoBehaviour
 {
 	void Start()
 	{
-		GameObject.Find("WaveController").GetComponent<WaveScript>().NewWave();
+		GameObject.Find("WaveController").GetComponent<WaveController>().NewWave();
 	}
 
 	public void PlayerDead()

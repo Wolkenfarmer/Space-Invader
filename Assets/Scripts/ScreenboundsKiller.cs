@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class OutOfScreenKillBehaviorScript : MonoBehaviour
+public class ScreenboundsKiller : MonoBehaviour
 {
 	Vector2 screenBounds;
 	Vector2 spriteBounds;
