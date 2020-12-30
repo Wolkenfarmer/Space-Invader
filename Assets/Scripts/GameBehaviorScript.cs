@@ -39,7 +39,7 @@ public class GameBehaviorScript : MonoBehaviour
 		for (int i = 0; i < currentWave; i++)
 		{
 			var obj = Instantiate(EnemyPrefab);
-			obj.transform.position = new Vector2(half + i * 2, 7f);
+			obj.transform.position = new Vector2(half + i * 2, 17f);
 			enemies.Add(obj);
 		}
 	}
