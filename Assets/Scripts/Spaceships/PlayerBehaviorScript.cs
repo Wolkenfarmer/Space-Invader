@@ -33,5 +33,6 @@ public class PlayerBehaviorScript : SpaceShipBehaviorScript
 	{
 		Debug.Log("Sad noises");
 		Destroy(gameObject);
+		GameObject.Find("GameController").GetComponent<GameBehaviorScript>().PlayerDead();
 	}
 }

@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class DefaultEnemyBehaviorScript : SpaceShipBehaviorScript
 {
+	Assets.Scripts.Unit parent;
 	bool moveRight;
+	bool partOfUnit;
 
 	void Start()
 	{
@@ -17,9 +19,22 @@ public class DefaultEnemyBehaviorScript : SpaceShipBehaviorScript
 
 		// Check if dead
 		if (Health <= 0)
+		{
+			parent.ObjectDown(gameObject);
 			Kill();
+		}
 
-		// Dummy movement
+		
+		if (!partOfUnit)
+			move();
+
+		// Always try to shoot
+		Fire();
+	}
+
+	// Dummy movement
+	void move()
+	{
 		if (transform.position.x > 8f)
 			moveRight = false;
 		else if (transform.position.x < -8f)
@@ -30,8 +45,11 @@ public class DefaultEnemyBehaviorScript : SpaceShipBehaviorScript
 			movement = -1f;
 
 		Move(movement, -Speed * 0.5f);
+	}
 
-		// Always try to shoot
-		Fire();
+	public void SetPartOfUnit(Assets.Scripts.Unit parent)
+	{
+		this.parent = parent;
+		partOfUnit = true;
 	}
 }
