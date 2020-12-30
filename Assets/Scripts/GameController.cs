@@ -22,6 +22,12 @@ public class GameController : MonoBehaviour
 		waveController.Init(GameState.Level);
 	}
 
+	void Update()
+	{
+		if (Input.GetKey(KeyCode.Escape))
+			SceneManager.LoadScene("menu");
+	}
+
 	public static void Victory()
 	{
 		Debug.Log("Happy noises");
