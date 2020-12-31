@@ -26,8 +26,6 @@ public class Playership : Spaceship
 		var h = Input.GetAxis("Horizontal");
 		var v = Input.GetAxis("Vertical");
 		Move(h, v);
-		if (Input.GetKey(KeyCode.Space))
-			Fire(true);
 
 		// Button Input
 		if (Up)
@@ -38,6 +36,9 @@ public class Playership : Spaceship
 			Move(-1, 0);
 		if (Right)
 			Move(1, 0);
+
+		// Always try to shoot
+		Fire(true);
 	}
 
 	protected override void Kill()
