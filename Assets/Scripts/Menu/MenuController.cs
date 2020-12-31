@@ -26,18 +26,19 @@ public class MenuController : MonoBehaviour
 
 	void equalButtonLabelFontSize()
 	{
-		List<float> fontSizes = new List<float>();
+		var smallestFontSize = float.MaxValue;
 		foreach (GameObject label in buttonLabels)
 		{
-			float fontSize = label.GetComponent<TextMeshProUGUI>().fontSize;
-			fontSizes.Add(fontSize);
+			var fontSize = label.GetComponent<TextMeshProUGUI>().fontSize;
+			if (fontSize < smallestFontSize)
+				smallestFontSize = fontSize;
 		}
-		float smallestFontSize = fontSizes.Min();
 
 		foreach (GameObject label in buttonLabels)
 		{
-			label.GetComponent<TextMeshProUGUI>().autoSizeTextContainer = false;
-			label.GetComponent<TextMeshProUGUI>().fontSizeMax = (int)Mathf.Floor(smallestFontSize);
+			var mesh = label.GetComponent<TextMeshProUGUI>();
+			mesh.autoSizeTextContainer = false;
+			mesh.fontSizeMax = (int)Mathf.Floor(smallestFontSize);
 		}
 
 		Debug.Log($"Set all button label to one maximum font size: {smallestFontSize}");
