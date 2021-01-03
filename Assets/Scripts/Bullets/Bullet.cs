@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour, Assets.Scripts.IDamageableObject
+public abstract class Bullet : MonoBehaviour, Assets.Scripts.IDamageableObject
 {
 	// if fired by player, move into the other direction!
 	[System.NonSerialized]
@@ -8,32 +8,19 @@ public class Bullet : MonoBehaviour, Assets.Scripts.IDamageableObject
 	[System.NonSerialized]
 	public int Team;
 
-	public float Speed;
+	public int Health { get; private set; }
+	public int Shield { get; private set; }
+	public int Damage { get; private set; }
 
-	int pHealth;
-	int pShield;
-	int pDamage;
-
-	public int Health
-	{
-		get { return pHealth; }
-	}
-	public int Shield
-	{
-		get { return pShield; }
-	}
-	public int Damage
-	{
-		get { return pDamage; }
-	}
+	public float Speed { get; private set; }
 
 	void Update()
 	{
 		// Check if dead and update of damage (bullet health = its damage)
-		if (pHealth <= 0)
+		if (Health <= 0)
 			Destroy(gameObject);
 		else
-			setDamage(pHealth);
+			setDamage(Health);
 
 		// Movement
 		var position = transform.position;
@@ -42,7 +29,7 @@ public class Bullet : MonoBehaviour, Assets.Scripts.IDamageableObject
 		if (FiredByPlayer)
 			speed = Speed;
 
-		position.y += speed;
+		position.y += speed * Time.deltaTime;
 
 		transform.position = position;
 	}
@@ -75,7 +62,9 @@ public class Bullet : MonoBehaviour, Assets.Scripts.IDamageableObject
 		otherObject.setShield(0);
 	}
 
-	public void setShield(int newShield) { pShield = newShield; }
-	public void setHealth(int newHealth) { pHealth = newHealth; }
-	public void setDamage(int newDamage) { pDamage = newDamage; }
+	public void setShield(int newShield) { Shield = newShield; }
+	public void setHealth(int newHealth) { Health = newHealth; }
+	public void setDamage(int newDamage) { Damage = newDamage; }
+
+	public void setSpeed(float newSpeed) { Speed = newSpeed; }
 }

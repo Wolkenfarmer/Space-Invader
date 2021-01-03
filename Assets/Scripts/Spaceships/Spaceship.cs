@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Spaceship : MonoBehaviour, Assets.Scripts.IDamageableObject
+public abstract class Spaceship : MonoBehaviour, Assets.Scripts.IDamageableObject
 {
 	public const int PlayerTeam = 1;
 	public const int EnemyTeam = 2;
@@ -10,24 +10,11 @@ public class Spaceship : MonoBehaviour, Assets.Scripts.IDamageableObject
 	[System.NonSerialized]
 	public int Team;
 
-	int pHealth;
-	int pShield;
-	int pDamage;
+	public int Health { get; private set; }
+	public int Shield { get; private set; }
+	public int Damage { get; private set; }
 
-	public int Health
-	{
-		get { return pHealth; }
-	}
-	public int Shield
-	{
-		get { return pShield; }
-	}
-	public int Damage
-	{
-		get { return pDamage; }
-	}
-
-	public float Speed;
+	public float Speed { get; private set; }
 
 	public int Reload;
 	int currentReload;
@@ -39,7 +26,7 @@ public class Spaceship : MonoBehaviour, Assets.Scripts.IDamageableObject
 
 	public void Move(float h, float v)
 	{
-		gameObject.transform.position += new Vector3(h * Speed, v * Speed);
+		gameObject.transform.position += new Vector3(h * Speed * Time.deltaTime, v * Speed * Time.deltaTime);
 	}
 
 	public void Fire(bool isPlayer = false)
@@ -99,7 +86,9 @@ public class Spaceship : MonoBehaviour, Assets.Scripts.IDamageableObject
 		Destroy(gameObject);
 	}
 
-	public void setShield(int newShield) { pShield = newShield; }
-	public void setHealth(int newHealth) { pHealth = newHealth; }
-	public void setDamage(int newDamage) { pDamage = newDamage; }
+	public void setShield(int newShield) { Shield = newShield; }
+	public void setHealth(int newHealth) { Health = newHealth; }
+	public void setDamage(int newDamage) { Damage = newDamage; }
+
+	public void setSpeed(float newSpeed) { Speed = newSpeed; }
 }

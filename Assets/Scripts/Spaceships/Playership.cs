@@ -10,8 +10,10 @@ public class Playership : Spaceship
 	void Start()
 	{
 		Team = PlayerTeam;
+
 		setHealth(2000);
 		setDamage(150);
+		setSpeed(20);
 	}
 
 	protected override void Update()

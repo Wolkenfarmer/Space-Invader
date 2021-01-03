@@ -7,8 +7,10 @@ public class Enemyship : Spaceship
 	void Start()
 	{
 		Team = EnemyTeam;
+
 		setHealth(200);
 		setDamage(50);
+		setSpeed(10);
 	}
 
 	protected override void Update()
@@ -41,7 +43,7 @@ public class Enemyship : Spaceship
 		if (!moveRight)
 			movement = -1f;
 
-		Move(movement, -Speed * 0.5f);
+		Move(movement, -0.5f);
 	}
 
 	public void SetPartOfUnit(Assets.Scripts.WaveUnit parent)
