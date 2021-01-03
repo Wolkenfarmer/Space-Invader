@@ -8,10 +8,14 @@ public class GameController : MonoBehaviour
 
 	WaveController waveController;
 
+	PauseController pauseController;
+
 	void Start()
 	{
 		UIController = GameObject.Find("UIController").GetComponent<UIController>();
 		waveController = GameObject.Find("WaveController").GetComponent<WaveController>();
+
+		pauseController = GameObject.Find("PauseController").GetComponent<PauseController>();
 
 		StartGame();
 	}
@@ -25,7 +29,7 @@ public class GameController : MonoBehaviour
 	void Update()
 	{
 		if (Input.GetKey(KeyCode.Escape))
-			SceneManager.LoadScene("menu");
+			pauseController.Pause(true);
 	}
 
 	public static void Victory()

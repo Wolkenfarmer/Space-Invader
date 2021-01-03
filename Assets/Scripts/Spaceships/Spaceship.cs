@@ -31,6 +31,10 @@ public abstract class Spaceship : MonoBehaviour, Assets.Scripts.IDamageableObjec
 
 	public void Fire(bool isPlayer = false)
 	{
+		// Check whether game is paused
+		if (PauseController.Paused)
+			return;
+
 		// Weapon is not reloaded
 		if (currentReload > 0)
 			return;
