@@ -6,11 +6,12 @@ namespace Assets.Scripts
 	public class WaveUnit
 	{
 		WaveController parent;
-		List<GameObject> objects = new List<GameObject>();
+		List<GameObject> objects;
 		GameObject group;
 		float leftBound;
 		float rightBound;
 		float speed = float.MaxValue;
+		bool firstTick = true;
 		private bool moveRight;
 
 		public WaveUnit(WaveController parent, List<GameObject> objects, bool firstRight)
@@ -23,22 +24,27 @@ namespace Assets.Scripts
 
 			group = new GameObject("EnemyUnit");
 
-			foreach (var obj in this.objects)
-			{
-				obj.transform.parent = group.transform;
-				var enemyScript = obj.GetComponent<Enemyship>();
-				enemyScript.SetPartOfUnit(this);
-
-				if (enemyScript.Speed < speed)
-					speed = enemyScript.Speed;
-			}
-
 			leftBound = this.objects[0].transform.position.x;
 			rightBound = this.objects[this.objects.Count - 1].transform.position.x;
 		}
 
 		public void Update()
 		{
+			// Objects have to be initialized first so we can get their speed
+			if (firstTick)
+			{
+				foreach (var obj in objects)
+				{
+					obj.transform.parent = group.transform;
+					var enemyScript = obj.GetComponent<Enemyship>();
+					enemyScript.SetPartOfUnit(this);
+
+					if (enemyScript.Speed < speed)
+						speed = enemyScript.Speed;
+				}
+				firstTick = false;
+			}
+
 			move();
 		}
 
@@ -66,9 +72,9 @@ namespace Assets.Scripts
 			if (!moveRight)
 				movement = -1f;
 
-			group.transform.position += new Vector3(movement * speed, speed * -0.1f);
-			rightBound += movement * speed;
-			leftBound += movement * speed;
+			group.transform.position += new Vector3(movement * speed * Time.deltaTime, speed * -0.1f * Time.deltaTime);
+			rightBound += movement * speed * Time.deltaTime;
+			leftBound += movement * speed * Time.deltaTime;
 		}
 
 		public void ObjectDown(GameObject objDown)
